@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Linking, PermissionsAndroid } from 'react-native';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import * as Location from 'expo-location'
-import AMapGeolocation  from '@uiw/react-native-amap-geolocation'
+import { init, Geolocation } from 'react-native-amap-geolocation'
 
 export default function App() {
   const [text, setText] = useState('')
@@ -26,31 +26,42 @@ export default function App() {
     }
   }, [])
 
+  useEffect(() => {
+    //   Location.watchPositionAsync({
+    //     accuracy: 6,
+    //     distanceInterval: 0,
+    //     timeInterval: 3000,
+    //     // android
+    //     mayShowUserSettingsDialog: true,
+    // }, p => {
+    //     console.log(Platform.OS, p)
+    //     setText(JSON.stringify(p))
+    // })
+
+  }, [])
 
   useEffect(() => {
-    let lister = null
+
     const initMap = async () => {
       await PermissionsAndroid.requestMultiple([
         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
         PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
       ])
 
-      console.log("AAA", AMapGeolocation.setApiKey)
-      AMapGeolocation.setApiKey("7e066f365be27b1aee36551c29de5502")
+      await init({
+        android: '7e066f365be27b1aee36551c29de5502',
+      }) // 高德api key
 
-      AMapGeolocation.start()
-
-      lister = AMapGeolocation.addLocationListener(location => {
-        console.log(location)
-        setText(JSON.stringify(location))
+      Geolocation.getCurrentPosition(loc => {
+        console.log('android: ', loc)
+        setText(JSON.stringify(loc))
       })
+      //       Geolocation.watchPosition(p = {
+      //        console.log('watch: ', p)
+      //       })
     }
 
     initMap()
-
-    return () => {
-      lister?.remove()
-    }
   }, [])
 
   return (

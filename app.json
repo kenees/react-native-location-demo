@@ -1,10 +1,23 @@
 {
   "expo": {
-    "name": "map-demo3",
-    "slug": "map-demo3",
+    "name": "map-demo14",
+    "slug": "map-demo14",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "991451a1-7c8d-4afa-aa7d-c67df9d7e8a0"
+      }
+    }, "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
+        }
+      ]
     ]
+
   }
 }
