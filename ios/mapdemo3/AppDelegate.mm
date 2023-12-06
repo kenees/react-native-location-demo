@@ -3,10 +3,16 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTLinkingManager.h>
 
+// wangcheng
+#import <AMapFoundationKit/AMapFoundationKit.h>
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  // wangcheng
+  [AMapServices sharedServices].apiKey = @"c825fdab9d55336f49668bdc1ed11794";
+
   self.moduleName = @"main";
 
   // You can add your custom initial props in the dictionary below.

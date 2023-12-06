@@ -12,4 +12,8 @@
 
 ### 3. TOOD
 1. 将ios定位也切换成高德库
-2. 将地图显示方案从原本的webview切换成高德sdk (webview本身限制比较大)
+2. 将地图显示方案从原本的webview切换成高德sdk (webview本身限制比较大) 
+    【2.1】 集成react-native-amap3d@^3.2.4
+    【2.2】 注意如果使用了amap-geolocation 需要将 react-native-amap-geolocaton/android/build.gradle中的
+    ```implementation 'com.amap.api:location:6.2.0'``` 更改为
+    ```implementation 'com.amap.api:3dmap:9.6.0'```

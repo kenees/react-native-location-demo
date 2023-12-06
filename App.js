@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Linking, PermissionsAndroid } from 'react-native';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import * as Location from 'expo-location'
-import AMapGeolocation  from '@uiw/react-native-amap-geolocation'
+// import AMapGeolocation  from '@uiw/react-native-amap-geolocation'
+import { MapView, AMapSdk } from 'react-native-amap3d';
+import { Platform } from 'react-native';
 
 export default function App() {
   const [text, setText] = useState('')
@@ -22,7 +24,6 @@ export default function App() {
     if (permission && permission.canAskAgain && !permission.granted) {
       console.log("pe1", permission.granted)
       setV2(true)
-
     }
   }, [])
 
@@ -46,11 +47,21 @@ export default function App() {
       })
     }
 
-    initMap()
+    // initMap()
 
     return () => {
       lister?.remove()
     }
+  }, [])
+
+
+  useEffect(() => {
+    AMapSdk.init(
+      Platform.select({
+        android: '7e066f365be27b1aee36551c29de5502',
+        ios: "c825fdab9d55336f49668bdc1ed11794"
+      })
+    )
   }, [])
 
   return (
@@ -67,6 +78,20 @@ export default function App() {
       <Button title='request..' onPress={requestPermission}>
         request...
       </Button>
+
+      <MapView 
+        myLocationEnabled
+        onLocation={d => {
+          console.log(d)
+        }}
+        style={{width: '100%', height: '100%'}}
+        // coordinate={{
+        //   latitude: 39.91,
+        //   longitude: 116.37
+        // }}
+      >
+          <Text>aa</Text>
+      </MapView>
     </View>
   );
 }
