@@ -13,3 +13,10 @@
 ### 3. TOOD
 1. 将ios定位也切换成高德库
 2. 将地图显示方案从原本的webview切换成高德sdk (webview本身限制比较大)
+
+
+
+### 回溯流程
+#### @uiw/react-native-amap-geolocation@^2.0.0-alpha.3
+1. yarn android   (第三方包需要将sdk集成到apk中才能使用)
+2. yarn ios (暂无环境，需要考虑切换为expo-location)
